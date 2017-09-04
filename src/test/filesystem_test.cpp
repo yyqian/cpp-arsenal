@@ -1,4 +1,4 @@
-﻿//
+//
 // Created by Yinyin Qian on 8/18/17.
 //
 
@@ -10,7 +10,7 @@ using namespace std;
 
 TEST(filesystem, ListFiles) {
   vector<string> files;
-  const string path(u8"C:/Users/yyqian/Downloads/软件");
+  const string path(u8"C:/Users/yyqian/Downloads/\u8F6F\u4EF6");
   cout << path << endl;
   ListFiles(path, files, true);
   for_each(files.cbegin(), files.cend(), [](const string &str) {
