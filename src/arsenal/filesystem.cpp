@@ -1,4 +1,4 @@
-﻿#ifdef _WIN32
+#ifdef _WIN32
 #define NULL_DEVICE "nul"
 #include <windows.h>
 #else
