@@ -1,9 +1,6 @@
 ﻿#ifdef _WIN32
 #define NULL_DEVICE "nul"
 #include <windows.h>
-#include <tchar.h>
-#include <stdlib.h>
-#include <clocale>
 #else
 #define NULL_DEVICE "/dev/null"
 #include <dirent.h>
@@ -12,63 +9,33 @@
 
 #include "filesystem.h"
 #include <iostream>
+#include "str.h"
 #include <string>
 
 using namespace std;
 
 #ifdef _WIN32
-wstring Char2WString(const char *input) {
-  const size_t newsize = strlen(input) + 1;
-  wchar_t *output = new wchar_t[newsize];
-  size_t converted_chars = 0;
-  mbstowcs_s(&converted_chars, output, newsize, input, _TRUNCATE);
-  wstring wstr(output);
-  delete[] output;
-  return wstr;
-}
-
-string WChar2String(const wchar_t *input) {
-  const size_t newsize = (wcslen(input) + 1) * 2;
-  char *output = new char[newsize];
-  size_t convertedChars = 0;
-  wcstombs_s(&convertedChars, output, newsize, input, _TRUNCATE);
-  string str(output);
-  delete[] output;
-  return str;
-}
-
-void ListFiles(const char *dir_name, vector<string> &files, bool recur) {
-  wstring w_dir_name = Char2WString(dir_name);
-  w_dir_name += L"/*.*";
-  wcout << w_dir_name << endl;
-  cout << WChar2String(w_dir_name.c_str()) << endl;
+void ListFiles(const string &dir_name, vector<string> &files, bool recur) {
+  wstring w_dir_name(Utf8ToWstring(dir_name + "/*.*"));
   WIN32_FIND_DATAW fd;
   HANDLE hFind = FindFirstFileW(w_dir_name.c_str(), &fd);
-  wcout << L"<" << fd.cFileName << L">" << endl;
-  string file_name = WChar2String(fd.cFileName);
-  cout << ">" << file_name << "<" << endl;
   if (hFind != INVALID_HANDLE_VALUE) {
     do {
-      // read all (real) files in current folder
-      // , delete '!' read other 2 default folder . and ..
-      if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
-        string fullname(dir_name);
-        fullname = (fullname + "/") + file_name;
-        files.push_back(fullname);
-      }
-      else {
-        string basename(file_name);
-        if (basename != "." && basename != ".." && recur) {
-          string fullname(dir_name + ("/" + basename));
-          ListFiles(fullname.c_str(), files, recur);
+      string file_name(WstringToUtf8(fd.cFileName));
+      if ((fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0) {
+        files.push_back(dir_name + "/" + file_name);
+      } else {
+        if (file_name != "." && file_name != ".." && recur) {
+          ListFiles(dir_name + "/" + file_name, files, recur);
         }
       }
     } while (FindNextFileW(hFind, &fd));
-    FindClose(hFind); //Close the handle after use or memory/resource leak
+    FindClose(hFind);
   }
 }
 #else
-void ListFiles(const char *dir_name, vector<string> &files, bool recur) {
+void ListFiles(const string &dir_name_str, vector<string> &files, bool recur) {
+  const char *dir_name = dir_name_str.c_str();
   struct dirent *dir;
   DIR *d = opendir(dir_name);
   if (d) {

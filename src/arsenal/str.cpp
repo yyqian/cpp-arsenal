@@ -1,7 +1,7 @@
 #include "str.h"
 #include <sstream>
-#include <iostream>
 #include <algorithm>
+#include <codecvt>
 
 using namespace std;
 
@@ -43,4 +43,42 @@ void Trim(string &s) {
 
 void RemoveSpace(string &s) {
     s.erase(remove_if(s.begin(), s.end(), ::isspace), s.end());
+}
+
+#ifdef _WIN32
+// convert UTF-16 string array to wstring
+wstring Char2Wstring(const char *input) {
+  const size_t newsize = strlen(input) + 1;
+  wchar_t *output = new wchar_t[newsize];
+  size_t converted_chars = 0;
+  mbstowcs_s(&converted_chars, output, newsize, input, _TRUNCATE);
+  wstring wstr(output);
+  delete[] output;
+  return wstr;
+}
+
+// convert wstring to UTF-16 string
+string Wchar2String(const wchar_t *input) {
+  const size_t newsize = (wcslen(input) + 1) * 2;
+  char *output = new char[newsize];
+  size_t convertedChars = 0;
+  wcstombs_s(&convertedChars, output, newsize, input, _TRUNCATE);
+  string str(output);
+  delete[] output;
+  return str;
+}
+#endif
+
+// convert UTF-8 string to wstring(UTF-16)
+std::wstring Utf8ToWstring(const std::string& str)
+{
+  std::wstring_convert<std::codecvt_utf8<wchar_t>> myconv;
+  return myconv.from_bytes(str);
+}
+
+// convert wstring(UTF-16) to UTF-8 string
+std::string WstringToUtf8(const std::wstring& str)
+{
+  std::wstring_convert<std::codecvt_utf8<wchar_t>> myconv;
+  return myconv.to_bytes(str);
 }
