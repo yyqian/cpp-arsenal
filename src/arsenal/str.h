@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <vector>
 
 void HexCStr(const char *c, std::string &str);
 

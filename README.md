@@ -1,2 +1,3 @@
 # cpp-arsenal
-my c++ libs
+
+my c++ libs, aiming for solid and cross-platform
