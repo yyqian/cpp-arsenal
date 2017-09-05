@@ -11,8 +11,39 @@
 #include <iostream>
 #include "str.h"
 #include <string>
+#include <fstream>
 
 using namespace std;
+
+arsenal::Encoding HasBom(const std::string &filename) {
+  ifstream input(filename, ios::in | ios::binary);
+  if (input) {
+    char buffer[4];
+    input.read(buffer, 4);
+    const static char EF = static_cast<char>(0xEF);
+    const static char FF = static_cast<char>(0xFF);
+    const static char FE = static_cast<char>(0xEF);
+    const static char BB = static_cast<char>(0xBB);
+    const static char BF = static_cast<char>(0xBF);
+    if (buffer[0] == EF && buffer[1] == BB && buffer[2] == BF) {
+      return arsenal::UTF_8;
+    }
+    if (buffer[0] == FE && buffer[1] == FF) {
+      return arsenal::UTF_16_BE;
+    }
+    if (buffer[0] == FF && buffer[1] == FE) {
+      return arsenal::UTF_16_LE;
+    }
+    if (buffer[0] == 0 && buffer[1] == 0 && buffer[2] == FE && buffer[3] == FF) {
+      return arsenal::UTF_32_BE;
+    }
+    if (buffer[0] == FF && buffer[1] == FE && buffer[2] == 0 && buffer[3] == 0) {
+      return arsenal::UTF_32_LE;
+    }
+    input.close();
+  }
+  return arsenal::UNKNOWN_ENCODING;
+}
 
 #ifdef _WIN32
 void ListFiles(const string &dir_name, vector<string> &files, bool recur) {
