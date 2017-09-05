@@ -9,3 +9,6 @@ include_directories(src/arsenal)
 
 add_subdirectory(src/arsenal)
 add_subdirectory(src/test)
+
+add_executable(bom-check src/bom-check.cpp)
+target_link_libraries(bom-check arsenal_static)
