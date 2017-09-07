@@ -8,8 +8,8 @@
 #endif
 
 #include "filesystem.h"
+#include "string_util.h"
 #include <iostream>
-#include "str.h"
 #include <string>
 #include <fstream>
 

@@ -1,7 +1,9 @@
 #pragma once
 #include <string>
 
-void HexCStr(const char *c, std::string &str);
+std::string Hexify(const wchar_t *c);
+
+std::string Hexify(const char *c);
 
 int ActualLength(const char *c);
 

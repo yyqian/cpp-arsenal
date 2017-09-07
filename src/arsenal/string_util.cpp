@@ -1,4 +1,4 @@
-#include "str.h"
+#include "string_util.h"
 #include <sstream>
 #include <algorithm>
 #include <codecvt>
@@ -6,21 +6,45 @@
 using namespace std;
 
 // convert C style string to hex string
-void HexCStr(const char *c, std::string &str) {
-    const static char dict[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+std::string Hexify(const char *c) {
+    static const char dict[] = "0123456789ABCDEF";
     ostringstream ss;
     bool first = true;
     do {
         if (first) {
             first = false;
-        }
-        else {
+        } else {
             ss << ' ';
         }
         ss << dict[(*c >> 4) & 0xF];
         ss << dict[*c & 0xF];
     } while (*(++c) != 0); // C style string end with 0x00 or '\0'
-    str = ss.str();
+    return ss.str();
+}
+
+std::string Hexify(const wchar_t *wc)
+{
+  static const char dict[] = "0123456789ABCDEF";
+  static const int len = static_cast<int>(sizeof(wchar_t));
+  ostringstream ss;
+  bool first = true;
+  do {
+    if (first) {
+      first = false;
+    } else {
+      ss << ' ';
+    }
+    int shift = 8 * (len - 1);
+    ss << dict[(*wc >> (shift + 4)) & 0xF];
+    ss << dict[(*wc >> shift) & 0xF];
+    for (int i = len - 2; i >= 0; --i) {
+      shift = 8 * i;
+      ss << ' ';
+      ss << dict[(*wc >> (shift + 4)) & 0xF];
+      ss << dict[(*wc >> shift) & 0xF];
+    }
+  } while (*(++wc) != 0);
+  return ss.str();
 }
 
 // count actual number of characters, '\0' excluded
@@ -45,40 +69,16 @@ void RemoveSpace(string &s) {
     s.erase(remove_if(s.begin(), s.end(), ::isspace), s.end());
 }
 
-#ifdef _WIN32
-// convert UTF-16 string array to wstring
-wstring Char2Wstring(const char *input) {
-  const size_t newsize = strlen(input) + 1;
-  wchar_t *output = new wchar_t[newsize];
-  size_t converted_chars = 0;
-  mbstowcs_s(&converted_chars, output, newsize, input, _TRUNCATE);
-  wstring wstr(output);
-  delete[] output;
-  return wstr;
-}
-
-// convert wstring to UTF-16 string
-string Wchar2String(const wchar_t *input) {
-  const size_t newsize = (wcslen(input) + 1) * 2;
-  char *output = new char[newsize];
-  size_t convertedChars = 0;
-  wcstombs_s(&convertedChars, output, newsize, input, _TRUNCATE);
-  string str(output);
-  delete[] output;
-  return str;
-}
-#endif
-
 // convert UTF-8 string to wstring(UTF-16)
 std::wstring Utf8ToWstring(const std::string& str)
 {
-  std::wstring_convert<std::codecvt_utf8<wchar_t>> myconv;
-  return myconv.from_bytes(str);
+  std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
+  return conv.from_bytes(str);
 }
 
 // convert wstring(UTF-16) to UTF-8 string
 std::string WstringToUtf8(const std::wstring& str)
 {
-  std::wstring_convert<std::codecvt_utf8<wchar_t>> myconv;
-  return myconv.to_bytes(str);
+  std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
+  return conv.to_bytes(str);
 }
