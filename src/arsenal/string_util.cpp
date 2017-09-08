@@ -1,7 +1,6 @@
 #include "string_util.h"
 #include <sstream>
 #include <algorithm>
-#include <codecvt>
 
 using namespace std;
 
@@ -67,18 +66,4 @@ void Trim(string &s) {
 
 void RemoveSpace(string &s) {
     s.erase(remove_if(s.begin(), s.end(), ::isspace), s.end());
-}
-
-// convert UTF-8 string to wstring(UTF-16)
-std::wstring Utf8ToWstring(const std::string& str)
-{
-  std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
-  return conv.from_bytes(str);
-}
-
-// convert wstring(UTF-16) to UTF-8 string
-std::string WstringToUtf8(const std::wstring& str)
-{
-  std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
-  return conv.to_bytes(str);
 }

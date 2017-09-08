@@ -34,3 +34,4 @@
 # Mannualy Added
 .vs/
 build/
+build-linux/

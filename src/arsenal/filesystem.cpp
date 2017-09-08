@@ -1,14 +1,15 @@
 #ifdef _WIN32
 #define NULL_DEVICE "nul"
 #include <windows.h>
+#include "utf8.h"
 #else
 #define NULL_DEVICE "/dev/null"
 #include <dirent.h>
 #include <sys/stat.h>
+#include <cstring>
 #endif
 
 #include "filesystem.h"
-#include "string_util.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -47,12 +48,12 @@ arsenal::Encoding HasBom(const std::string &filename) {
 
 #ifdef _WIN32
 void ListFiles(const string &dir_name, vector<string> &files, bool recur) {
-  wstring w_dir_name(Utf8ToWstring(dir_name + "/*.*"));
+  wstring w_dir_name(Widen(dir_name + "/*.*"));
   WIN32_FIND_DATAW fd;
   HANDLE hFind = FindFirstFileW(w_dir_name.c_str(), &fd);
   if (hFind != INVALID_HANDLE_VALUE) {
     do {
-      string file_name(WstringToUtf8(fd.cFileName));
+      string file_name(Narrow(fd.cFileName));
       if ((fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0) {
         files.push_back(dir_name + "/" + file_name);
       } else {
