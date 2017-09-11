@@ -155,7 +155,6 @@ void rvalue_demo() {
   int i = 42;
   int &ri = i;
   const int &r2 = i * 42;
-
   int &&rr2 = i * 42;
   int &&rr3 = std::move(i);
 }
