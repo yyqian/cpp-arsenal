@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include <vector>
+#include <algorithm>
 
 struct NoCopy {
   NoCopy() = default; // default constructor
@@ -71,7 +73,29 @@ public:
   StrVec() : elements(nullptr), first_free(nullptr), cap(nullptr) {}
   StrVec(const StrVec&);
   ~StrVec();
+  StrVec(StrVec &&s) noexcept
+    : elements(s.elements), first_free(s.first_free), cap(s.cap) {
+    s.elements = nullptr;
+    s.first_free = nullptr;
+    s.cap = nullptr;
+  }
+  StrVec &operator=(StrVec &&rhs) noexcept {
+    if (this != &rhs) {
+      free();
+      elements = rhs.elements;
+      first_free = rhs.first_free;
+      cap = rhs.cap;
+      rhs.elements = nullptr;
+      rhs.first_free = nullptr;
+      rhs.cap = nullptr;
+    }
+    return *this;
+  }
   void push_back(const std::string&);
+  void push_back(std::string &&s) {
+    chk_n_alloc();
+    alloc.construct(first_free++, std::move(s));
+  }
   size_t size() const {
     return first_free - elements;
   }
@@ -129,14 +153,6 @@ StrVec::~StrVec() {
   free();
 }
 
-StrVec &StrVec::operator=(const StrVec &rhs) {
-  auto data = alloc_n_copy(rhs.begin(), rhs.end();
-  free();
-  elements = data.first;
-  first_free = cap = data.second;
-  return *this;
-}
-
 void StrVec::reallocate() {
   auto newcapacity = size() ? 2 * size() : 1;
   auto newdata = alloc.allocate(newcapacity);
@@ -158,3 +174,35 @@ void rvalue_demo() {
   int &&rr2 = i * 42;
   int &&rr3 = std::move(i);
 }
+
+struct X {
+  int i;
+  std::string s;
+};
+
+struct hasX {
+  X mem;
+};
+
+
+void rvalue_test() {
+  X x;
+  X x2 = std::move(x);
+  hasX hx;
+  hasX hx2 = std::move(hx);
+}
+
+class Foo {
+public:
+  Foo sorted() && {
+    std::sort(data.begin(), data.end());
+    return *this;
+  };
+  Foo sorted() const & {
+    Foo ret(*this);
+    std::sort(ret.data.begin(), ret.data.end());
+    return ret;
+  }
+private:
+  std::vector<int> data;
+};
