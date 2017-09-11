@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <memory>
 
 struct NoCopy {
   NoCopy() = default; // default constructor
@@ -30,7 +31,7 @@ HasPtr& HasPtr::operator=(const HasPtr &rhs) {
 
 class HasPtrPointLike {
 public:
-  HasPtrPointLike(const std::string &s = std::string()): ps(new std::string(s)), i(0), use(new std::size_t(1)) {}
+  HasPtrPointLike(const std::string &s = std::string()) : ps(new std::string(s)), i(0), use(new std::size_t(1)) {}
   HasPtrPointLike(const HasPtrPointLike &p) : ps(p.ps), i(p.i), use(p.use) { ++*use; }
   HasPtrPointLike& operator=(const HasPtrPointLike&);
   ~HasPtrPointLike();
@@ -63,4 +64,97 @@ inline void swap(HasPtr &lhs, HasPtr &rhs) {
   using std::swap;
   swap(lhs.ps, rhs.ps);
   swap(lhs.i, rhs.i);
+}
+
+class StrVec {
+public:
+  StrVec() : elements(nullptr), first_free(nullptr), cap(nullptr) {}
+  StrVec(const StrVec&);
+  ~StrVec();
+  void push_back(const std::string&);
+  size_t size() const {
+    return first_free - elements;
+  }
+  size_t capacity() const {
+    return cap - elements;
+  }
+  std::string *begin() const {
+    return elements;
+  }
+  std::string *end() const {
+    return first_free;
+  }
+private:
+  std::allocator<std::string> alloc;
+  std::string *elements;
+  std::string *first_free;
+  std::string *cap;
+  void free();
+  void reallocate();
+  std::pair<std::string*, std::string*> alloc_n_copy(const std::string*, const std::string*);
+  void chk_n_alloc() {
+    if (size() == capacity()) {
+      reallocate();
+    }
+  }
+};
+
+void StrVec::push_back(const std::string &s) {
+  chk_n_alloc();
+  alloc.construct(first_free++, s);
+}
+
+std::pair<std::string*, std::string*> StrVec::alloc_n_copy(const std::string *b, const std::string *e) {
+  auto data = alloc.allocate(e - b);
+  return {data, std::uninitialized_copy(b, e, data)};
+}
+
+void StrVec::free() {
+  if (elements) {
+    for (auto p = first_free; p != elements;) {
+      alloc.destroy(--p);
+    }
+    alloc.deallocate(elements, cap - elements);
+  }
+}
+
+StrVec::StrVec(const StrVec &s) {
+  auto newdata = alloc_n_copy(s.begin(), s.end());
+  elements = newdata.first;
+  first_free = newdata.second;
+  cap = newdata.second;
+}
+
+StrVec::~StrVec() {
+  free();
+}
+
+StrVec &StrVec::operator=(const StrVec &rhs) {
+  auto data = alloc_n_copy(rhs.begin(), rhs.end();
+  free();
+  elements = data.first;
+  first_free = cap = data.second;
+  return *this;
+}
+
+void StrVec::reallocate() {
+  auto newcapacity = size() ? 2 * size() : 1;
+  auto newdata = alloc.allocate(newcapacity);
+  auto dest = newdata;
+  auto elem = elements;
+  for (size_t i = 0; i != size(); ++i) {
+    alloc.construct(dest++, std::move(*elem++));
+  }
+  free();
+  elements = newdata;
+  first_free = dest;
+  cap = elements + newcapacity;
+}
+
+void rvalue_demo() {
+  int i = 42;
+  int &ri = i;
+  const int &r2 = i * 42;
+  int &&rr2 = i * 42;
+  int &&rr3 = std::move(i);
 }
