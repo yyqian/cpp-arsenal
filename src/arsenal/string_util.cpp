@@ -6,23 +6,22 @@ using namespace std;
 
 // convert C style string to hex string
 std::string Hexify(const char *c) {
-    static const char dict[] = "0123456789ABCDEF";
-    ostringstream ss;
-    bool first = true;
-    do {
-        if (first) {
-            first = false;
-        } else {
-            ss << ' ';
-        }
-        ss << dict[(*c >> 4) & 0xF];
-        ss << dict[*c & 0xF];
-    } while (*(++c) != 0); // C style string end with 0x00 or '\0'
-    return ss.str();
+  static const char dict[] = "0123456789ABCDEF";
+  ostringstream ss;
+  bool first = true;
+  do {
+    if (first) {
+      first = false;
+    } else {
+      ss << ' ';
+    }
+    ss << dict[(*c >> 4) & 0xF];
+    ss << dict[*c & 0xF];
+  } while (*(++c) != 0); // C style string end with 0x00 or '\0'
+  return ss.str();
 }
 
-std::string Hexify(const wchar_t *wc)
-{
+std::string Hexify(const wchar_t *wc) {
   static const char dict[] = "0123456789ABCDEF";
   static const int len = static_cast<int>(sizeof(wchar_t));
   ostringstream ss;
@@ -48,22 +47,22 @@ std::string Hexify(const wchar_t *wc)
 
 // count actual number of characters, '\0' excluded
 int ActualLength(const char *c) {
-    int i = 0;
-    while (*(c++) != 0) {
-        ++i;
-    }
-    return i;
+  int i = 0;
+  while (*(c++) != 0) {
+    ++i;
+  }
+  return i;
 }
 
 void Trim(string &s) {
-    s.erase(s.begin(), find_if(s.begin(), s.end(), [](int ch) {
-        return 0 == isspace(ch);
-    }));
-    s.erase(find_if(s.rbegin(), s.rend(), [](int ch) {
-        return 0 == isspace(ch);
-    }).base(), s.end());
+  s.erase(s.begin(), find_if(s.begin(), s.end(), [](int ch) {
+    return 0 == isspace(ch);
+  }));
+  s.erase(find_if(s.rbegin(), s.rend(), [](int ch) {
+    return 0 == isspace(ch);
+  }).base(), s.end());
 }
 
 void RemoveSpace(string &s) {
-    s.erase(remove_if(s.begin(), s.end(), ::isspace), s.end());
+  s.erase(remove_if(s.begin(), s.end(), ::isspace), s.end());
 }

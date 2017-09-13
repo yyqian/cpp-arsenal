@@ -4,7 +4,7 @@
 using namespace std;
 
 TEST(fit, Slope) {
-  vector<int> x = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+  vector<int> x = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
   vector<int> y(x.size());
   const int actual_slope = 2;
   transform(x.begin(), x.end(), y.begin(), [actual_slope](int i) {
@@ -12,4 +12,17 @@ TEST(fit, Slope) {
   });
   double slope = Slope(x, y);
   EXPECT_EQ(actual_slope, (int)slope);
+}
+
+TEST(fit, FitClass) {
+  vector<int> x = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  vector<int> y(x.size());
+  const int actual_slope = 2;
+  transform(x.begin(), x.end(), y.begin(), [actual_slope](int i) {
+    return actual_slope * i;
+  });
+  Fit fit;
+  fit.LinearFit(x, y);
+  EXPECT_EQ(actual_slope, (int)fit.get_slope());
+  EXPECT_EQ(0, (int)fit.get_intercept());
 }
