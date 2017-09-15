@@ -33,5 +33,6 @@ TEST(string, wchar) {
   EXPECT_EQ("00 00 00 41 00 00 4E 2D", Hexify(source1.c_str()));
   EXPECT_EQ("41 E4 B8 AD", Hexify(source2));
   EXPECT_EQ("41 E4 B8 AD", Hexify(source3.c_str()));
+  EXPECT_EQ("41 E4 B8 AD", Hexify(source4.c_str()));
 #endif
 }
