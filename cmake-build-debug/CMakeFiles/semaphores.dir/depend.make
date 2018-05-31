@@ -1,2 +1,2 @@
-# Empty dependencies file for t0.
+# Empty dependencies file for semaphores.
 # This may be replaced when dependencies are built.

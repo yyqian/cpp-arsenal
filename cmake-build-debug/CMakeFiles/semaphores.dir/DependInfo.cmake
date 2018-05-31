@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/yyqian/work/repos/cpp-arsenal/src/playground/t0.c" "/Users/yyqian/work/repos/cpp-arsenal/cmake-build-debug/CMakeFiles/t0.dir/src/playground/t0.c.o"
+  "/Users/yyqian/work/repos/cpp-arsenal/src/playground/semaphores.c" "/Users/yyqian/work/repos/cpp-arsenal/cmake-build-debug/CMakeFiles/semaphores.dir/src/playground/semaphores.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

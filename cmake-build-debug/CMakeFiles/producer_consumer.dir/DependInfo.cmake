@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/yyqian/work/repo/cpp-arsenal/src/playground/producer_consumer.c" "/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/CMakeFiles/producer_consumer.dir/src/playground/producer_consumer.c.o"
+  "/Users/yyqian/work/repos/cpp-arsenal/src/playground/producer_consumer.c" "/Users/yyqian/work/repos/cpp-arsenal/cmake-build-debug/CMakeFiles/producer_consumer.dir/src/playground/producer_consumer.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

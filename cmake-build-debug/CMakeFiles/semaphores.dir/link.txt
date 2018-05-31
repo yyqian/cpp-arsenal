@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/cc -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/semaphores.dir/src/playground/semaphores.c.o  -o bin/semaphores -lpthred 

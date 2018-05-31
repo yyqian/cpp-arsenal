@@ -1,4 +1,4 @@
-# Install script for directory: /Users/yyqian/work/repo/cpp-arsenal
+# Install script for directory: /Users/yyqian/work/repos/cpp-arsenal
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -27,9 +27,14 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
+# Is this installation the result of a crosscompile?
+if(NOT DEFINED CMAKE_CROSSCOMPILING)
+  set(CMAKE_CROSSCOMPILING "FALSE")
+endif()
+
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/arsenal/cmake_install.cmake")
+  include("/Users/yyqian/work/repos/cpp-arsenal/cmake-build-debug/src/arsenal/cmake_install.cmake")
 
 endif()
 
@@ -41,5 +46,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/yyqian/work/repos/cpp-arsenal/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
