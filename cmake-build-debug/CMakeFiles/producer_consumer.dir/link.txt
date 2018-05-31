@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/cc -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/producer_consumer.dir/src/playground/producer_consumer.c.o  -o bin/producer_consumer -lpthread 

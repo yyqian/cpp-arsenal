@@ -6,10 +6,14 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 
 include_directories(src/arsenal)
+include_directories(src)
 
 add_subdirectory(src/arsenal)
-add_subdirectory(src/test)
 
 add_executable(bom-check src/bom-check.cpp)
 add_executable(java_util src/java_util.cpp)
+add_executable(t0 src/playground/t0.c)
+add_executable(producer_consumer src/playground/producer_consumer.c)
 target_link_libraries(bom-check arsenal_static)
+target_link_libraries(t0 pthread)
+target_link_libraries(producer_consumer pthread)

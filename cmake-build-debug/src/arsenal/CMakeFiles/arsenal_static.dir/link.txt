@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc ../../lib/libarsenal.a  CMakeFiles/arsenal_static.dir/filesystem.cpp.o CMakeFiles/arsenal_static.dir/string_util.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib ../../lib/libarsenal.a

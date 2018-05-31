@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="googletest-distribution"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="clang"/>
+		<Option virtualFolders="CMake Files\;CMake Files\src\;CMake Files\src\arsenal\;CMake Files\src\test\;CMake Files\src\test\googletest\;CMake Files\src\test\googletest\googlemock\;CMake Files\src\test\googletest\googletest\;CMake Files\src\test\googletest\googletest\cmake\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gmock">
+				<Option output="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/lib/libgmock.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/arsenal"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googlemock/include"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googlemock"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/include"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/Makefile&quot;  VERBOSE=1 gmock"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gmock/fast">
+				<Option output="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/lib/libgmock.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/arsenal"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googlemock/include"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googlemock"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/include"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/Makefile&quot;  VERBOSE=1 gmock/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gmock_main">
+				<Option output="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/lib/libgmock_main.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/arsenal"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googlemock/include"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googlemock"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/include"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/Makefile&quot;  VERBOSE=1 gmock_main"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gmock_main/fast">
+				<Option output="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/lib/libgmock_main.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/arsenal"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googlemock/include"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googlemock"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/include"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/Makefile&quot;  VERBOSE=1 gmock_main/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest_main">
+				<Option output="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/lib/libgtest_main.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/arsenal"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/include"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 gtest_main"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest_main/fast">
+				<Option output="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/lib/libgtest_main.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/arsenal"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/include"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 gtest_main/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest">
+				<Option output="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/lib/libgtest.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/arsenal"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/include"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 gtest"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest/fast">
+				<Option output="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/lib/libgtest.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/arsenal"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/include"/>
+					<Add directory="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 gtest/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/yyqian/work/repo/cpp-arsenal/cmake-build-debug/src/test/googletest/googlemock/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googlemock/src/gmock-all.cc">
+			<Option target="gmock"/>
+			<Option target="gmock_main"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googlemock/src/gmock_main.cc">
+			<Option target="gmock_main"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/src/gtest-all.cc">
+			<Option target="gmock"/>
+			<Option target="gmock_main"/>
+			<Option target="gtest"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/src/gtest_main.cc">
+			<Option target="gtest_main"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/arsenal/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\arsenal\"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\test\"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\test\googletest\"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\test\googletest\"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googlemock/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\test\googletest\googlemock\"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googlemock/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\test\googletest\googlemock\"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googlemock/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\test\googletest\googlemock\"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\test\googletest\googletest\"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\test\googletest\googletest\"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\test\googletest\googletest\"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\test\googletest\googletest\"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/cmake/internal_utils.cmake">
+			<Option virtualFolder="CMake Files\src\test\googletest\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/cmake/internal_utils.cmake">
+			<Option virtualFolder="CMake Files\src\test\googletest\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/cmake/internal_utils.cmake">
+			<Option virtualFolder="CMake Files\src\test\googletest\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/yyqian/work/repo/cpp-arsenal/src/test/googletest/googletest/cmake/internal_utils.cmake">
+			<Option virtualFolder="CMake Files\src\test\googletest\googletest\cmake\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
