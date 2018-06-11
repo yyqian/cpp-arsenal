@@ -1,26 +1,13 @@
 {
-    "files.associations": {
-        "string": "cpp",
-        "stdio.h": "c",
-        "__config": "cpp",
-        "__nullptr": "cpp",
-        "cstddef": "cpp",
-        "exception": "cpp",
-        "initializer_list": "cpp",
-        "new": "cpp",
-        "stdexcept": "cpp",
-        "type_traits": "cpp",
-        "typeinfo": "cpp",
-        "algorithm": "cpp",
-        "codecvt": "cpp",
-        "sstream": "cpp",
-        "iterator": "cpp",
-        "vector": "cpp",
-        "iosfwd": "cpp",
-        "memory": "cpp",
-        "pthread.h": "c",
-        "iostream": "cpp"
-    },
     "C_Cpp.clang_format_style": "Google",
-    "editor.tabSize": 2
+    "C_Cpp.autoAddFileAssociations": false,
+    "editor.tabSize": 2,
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "boundary",
+    "editor.rulers": [
+        80
+    ]
 }
