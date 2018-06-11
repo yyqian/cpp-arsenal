@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "debug_play",
+      "name": "debug play",
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/build/bin/play",
