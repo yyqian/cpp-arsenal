@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-BUILD_DIR=build-linux
+BUILD_DIR=build
 
 clear_build() {
     if [ -d "${BUILD_DIR}" ]; then

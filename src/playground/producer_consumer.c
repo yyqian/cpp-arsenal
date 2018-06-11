@@ -1,8 +1,8 @@
 //
 // Created by Yinyin Qian on 5/31/18.
 //
-#include <stdio.h>
 #include <pthread.h>
+#include <stdio.h>
 
 static const int MAX = 100;
 

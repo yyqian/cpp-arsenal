@@ -1,6 +1,6 @@
 #include "string_util.h"
-#include <sstream>
 #include <algorithm>
+#include <sstream>
 
 using namespace std;
 
@@ -17,7 +17,7 @@ std::string Hexify(const char *c) {
     }
     ss << dict[(*c >> 4) & 0xF];
     ss << dict[*c & 0xF];
-  } while (*(++c) != 0); // C style string end with 0x00 or '\0'
+  } while (*(++c) != 0);  // C style string end with 0x00 or '\0'
   return ss.str();
 }
 
@@ -55,12 +55,11 @@ int ActualLength(const char *c) {
 }
 
 void Trim(string &s) {
-  s.erase(s.begin(), find_if(s.begin(), s.end(), [](int ch) {
-    return 0 == isspace(ch);
-  }));
-  s.erase(find_if(s.rbegin(), s.rend(), [](int ch) {
-    return 0 == isspace(ch);
-  }).base(), s.end());
+  s.erase(s.begin(),
+          find_if(s.begin(), s.end(), [](int ch) { return 0 == isspace(ch); }));
+  s.erase(find_if(s.rbegin(), s.rend(), [](int ch) { return 0 == isspace(ch); })
+              .base(),
+          s.end());
 }
 
 void RemoveSpace(string &s) {

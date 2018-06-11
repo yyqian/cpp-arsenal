@@ -1,29 +1,31 @@
-#include <iostream>
-#include <string>
-#include <memory>
-#include <vector>
 #include <algorithm>
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
 
 struct NoCopy {
-  NoCopy() = default; // default constructor
-  NoCopy(const NoCopy&) = delete; // copy constructor
-  NoCopy& operator=(const NoCopy&) = delete; // copy-assignment operator
-  ~NoCopy() = default; // destructor
+  NoCopy() = default;                          // default constructor
+  NoCopy(const NoCopy &) = delete;             // copy constructor
+  NoCopy &operator=(const NoCopy &) = delete;  // copy-assignment operator
+  ~NoCopy() = default;                         // destructor
 };
 
 class HasPtr {
-  friend void swap(HasPtr&, HasPtr&);
-public:
+  friend void swap(HasPtr &, HasPtr &);
+
+ public:
   HasPtr(const std::string &s = std::string()) : ps(new std::string(s)), i(0) {}
-  HasPtr(const HasPtr &p) : ps(new std::string(*(p.ps))), i(p.i) {};
-  HasPtr& operator=(const HasPtr &);
+  HasPtr(const HasPtr &p) : ps(new std::string(*(p.ps))), i(p.i){};
+  HasPtr &operator=(const HasPtr &);
   ~HasPtr() { delete ps; }
-private:
+
+ private:
   std::string *ps;
   int i;
 };
 
-HasPtr& HasPtr::operator=(const HasPtr &rhs) {
+HasPtr &HasPtr::operator=(const HasPtr &rhs) {
   auto newp = new std::string(*(rhs.ps));
   delete ps;
   ps = newp;
@@ -32,18 +34,22 @@ HasPtr& HasPtr::operator=(const HasPtr &rhs) {
 }
 
 class HasPtrPointLike {
-public:
-  HasPtrPointLike(const std::string &s = std::string()) : ps(new std::string(s)), i(0), use(new std::size_t(1)) {}
-  HasPtrPointLike(const HasPtrPointLike &p) : ps(p.ps), i(p.i), use(p.use) { ++*use; }
-  HasPtrPointLike& operator=(const HasPtrPointLike&);
+ public:
+  HasPtrPointLike(const std::string &s = std::string())
+      : ps(new std::string(s)), i(0), use(new std::size_t(1)) {}
+  HasPtrPointLike(const HasPtrPointLike &p) : ps(p.ps), i(p.i), use(p.use) {
+    ++*use;
+  }
+  HasPtrPointLike &operator=(const HasPtrPointLike &);
   ~HasPtrPointLike();
-private:
+
+ private:
   std::string *ps;
   int i;
   std::size_t *use;
 };
 
-HasPtrPointLike& HasPtrPointLike::operator=(const HasPtrPointLike &rhs) {
+HasPtrPointLike &HasPtrPointLike::operator=(const HasPtrPointLike &rhs) {
   ++*rhs.use;
   if (--*use == 0) {
     delete ps;
@@ -69,12 +75,12 @@ inline void swap(HasPtr &lhs, HasPtr &rhs) {
 }
 
 class StrVec {
-public:
+ public:
   StrVec() : elements(nullptr), first_free(nullptr), cap(nullptr) {}
-  StrVec(const StrVec&);
+  StrVec(const StrVec &);
   ~StrVec();
   StrVec(StrVec &&s) noexcept
-    : elements(s.elements), first_free(s.first_free), cap(s.cap) {
+      : elements(s.elements), first_free(s.first_free), cap(s.cap) {
     s.elements = nullptr;
     s.first_free = nullptr;
     s.cap = nullptr;
@@ -91,31 +97,25 @@ public:
     }
     return *this;
   }
-  void push_back(const std::string&);
+  void push_back(const std::string &);
   void push_back(std::string &&s) {
     chk_n_alloc();
     alloc.construct(first_free++, std::move(s));
   }
-  size_t size() const {
-    return first_free - elements;
-  }
-  size_t capacity() const {
-    return cap - elements;
-  }
-  std::string *begin() const {
-    return elements;
-  }
-  std::string *end() const {
-    return first_free;
-  }
-private:
+  size_t size() const { return first_free - elements; }
+  size_t capacity() const { return cap - elements; }
+  std::string *begin() const { return elements; }
+  std::string *end() const { return first_free; }
+
+ private:
   std::allocator<std::string> alloc;
   std::string *elements;
   std::string *first_free;
   std::string *cap;
   void free();
   void reallocate();
-  std::pair<std::string*, std::string*> alloc_n_copy(const std::string*, const std::string*);
+  std::pair<std::string *, std::string *> alloc_n_copy(const std::string *,
+                                                       const std::string *);
   void chk_n_alloc() {
     if (size() == capacity()) {
       reallocate();
@@ -128,7 +128,8 @@ void StrVec::push_back(const std::string &s) {
   alloc.construct(first_free++, s);
 }
 
-std::pair<std::string*, std::string*> StrVec::alloc_n_copy(const std::string *b, const std::string *e) {
+std::pair<std::string *, std::string *> StrVec::alloc_n_copy(
+    const std::string *b, const std::string *e) {
   auto data = alloc.allocate(e - b);
   return {data, std::uninitialized_copy(b, e, data)};
 }
@@ -149,9 +150,7 @@ StrVec::StrVec(const StrVec &s) {
   cap = newdata.second;
 }
 
-StrVec::~StrVec() {
-  free();
-}
+StrVec::~StrVec() { free(); }
 
 void StrVec::reallocate() {
   auto newcapacity = size() ? 2 * size() : 1;
@@ -184,7 +183,6 @@ struct hasX {
   X mem;
 };
 
-
 void rvalue_test() {
   X x;
   X x2 = std::move(x);
@@ -193,7 +191,7 @@ void rvalue_test() {
 }
 
 class Foo {
-public:
+ public:
   Foo sorted() && {
     std::sort(data.begin(), data.end());
     return *this;
@@ -203,6 +201,7 @@ public:
     std::sort(ret.data.begin(), ret.data.end());
     return ret;
   }
-private:
+
+ private:
   std::vector<int> data;
 };

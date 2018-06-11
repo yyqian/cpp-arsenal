@@ -1,9 +1,9 @@
 //
 // Created by Yinyin Qian on 5/31/18.
 //
-#include <stdio.h>
 #include <pthread.h>
 #include <semaphore.h>
+#include <stdio.h>
 
 typedef struct _rwlock_t {
   sem_t lock;
@@ -35,15 +35,8 @@ void rwlock_release_readlock(rwlock_t *rw) {
   sem_post(&rw->lock);
 }
 
-void rwlock_acquire_writelock(rwlock_t *rw) {
-  sem_wait(&rw->writelock);
-}
+void rwlock_acquire_writelock(rwlock_t *rw) { sem_wait(&rw->writelock); }
 
-void rwlock_release_writelock(rwlock_t *rw) {
-  sem_post(&rw->writelock);
-}
+void rwlock_release_writelock(rwlock_t *rw) { sem_post(&rw->writelock); }
 
-int main(int argc, char **argv) {
-
-  return 0;
-}
+int main(int argc, char **argv) { return 0; }
