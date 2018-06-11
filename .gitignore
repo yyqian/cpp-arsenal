@@ -35,6 +35,5 @@
 .vs/
 build/
 build-linux/
-.vscode/
 cmake-build-debug/
 .idea/
