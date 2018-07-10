@@ -8,7 +8,7 @@
       "name": "debug program",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/bin/http",
+      "program": "${workspaceFolder}/build/bin/apue_file",
       "cwd": "${workspaceFolder}",
       "externalConsole": false,
       "stopAtEntry": false,
