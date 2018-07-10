@@ -1,0 +1,4 @@
+
+char[] ParityBit(char[] input) {
+
+}

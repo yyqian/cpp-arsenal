@@ -8,10 +8,15 @@ clear_build() {
 }
 
 build() {
-    mkdir ${BUILD_DIR}
     cd ${BUILD_DIR}
-    cmake .. && make
+    cmake -DCMAKE_BUILD_TYPE=Debug .. && make
     cd ..
+}
+
+rebuild() {
+    clear_build
+    mkdir ${BUILD_DIR}
+    build
 }
 
 unit_test() {
@@ -30,6 +35,10 @@ case $1 in
    build)
       shift
       build
+      ;;
+   rebuild)
+      shift
+      rebuild
       ;;
    test)
       shift
