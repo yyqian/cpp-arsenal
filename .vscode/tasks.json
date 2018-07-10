@@ -12,14 +12,15 @@
         "isDefault": true
       },
       "presentation": {
-          "reveal": "never",
-          "panel": "shared"
-      }
+        "reveal": "never",
+        "panel": "shared"
+      },
+      "problemMatcher": []
     },
     {
       "label": "rebuild",
       "type": "shell",
-      "command": "BUILD_DIR=build && rm -rf ${BUILD_DIR} && mkdir ${BUILD_DIR} && cd ${BUILD_DIR} && cmake -DCMAKE_BUILD_TYPE=Debug .. && make",
+      "command": "BUILD_DIR=build && rm -rf ${BUILD_DIR} && mkdir ${BUILD_DIR} && cd ${BUILD_DIR} && cmake -DCMAKE_BUILD_TYPE=Debug .. && make"
     },
     {
       "label": "clear build",

@@ -5,10 +5,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "debug play",
+      "name": "debug program",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/bin/play",
+      "program": "${workspaceFolder}/build/bin/http",
       "cwd": "${workspaceFolder}",
       "externalConsole": false,
       "stopAtEntry": false,
