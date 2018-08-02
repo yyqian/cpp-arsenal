@@ -18,6 +18,7 @@ add_executable(semaphores src/playground/semaphores.c src/playground/zemaphores.
 add_executable(play src/playground/play.cpp)
 add_executable(http src/playground/http.cpp)
 add_executable(apue_file src/apue/file.cpp)
+add_executable(io src/apue/io.cpp)
 target_link_libraries(bom-check arsenal_static)
 target_link_libraries(t0 pthread)
 target_link_libraries(producer_consumer pthread)
