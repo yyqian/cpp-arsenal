@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
   servaddr.sin_family = AF_INET;
   servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
   servaddr.sin_port = htons(8888);
-  bind(listenfd, (sockaddr *)&servaddr, sizeof(servaddr)); // 把端口绑定到 socket
+  bind(listenfd, (struct sockaddr *)&servaddr, sizeof(servaddr)); // 把端口绑定到 socket
   listen(listenfd, 1024); // 转化为 listening socket，1024 是最大等待数
   while (true) {
     connfd = accept(listenfd, (sockaddr *) NULL, NULL); // 客户端三次握手完成后，accept 返回

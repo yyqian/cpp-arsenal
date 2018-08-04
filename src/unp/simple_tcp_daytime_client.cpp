@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
   servaddr.sin_family = AF_INET;
   servaddr.sin_port = htons(8888);
   inet_pton(AF_INET, argv[1], &servaddr.sin_addr); // ip 转换
-  connect(sockfd, (sockaddr *)&servaddr, sizeof(servaddr)); // 创建连接
+  connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr)); // 创建连接
   while ((n = read(sockfd, buff, MAXLINE)) > 0) { // 读取和打印
     buff[n] = 0; // null terminate
     fputs(buff, stdout);
