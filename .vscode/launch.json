@@ -8,7 +8,7 @@
       "name": "debug program",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/bin/io",
+      "program": "${workspaceFolder}/build/bin/tcp_daytime_server",
       "cwd": "${workspaceFolder}",
       "externalConsole": false,
       "stopAtEntry": false,
