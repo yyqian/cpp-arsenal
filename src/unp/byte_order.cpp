@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <endian.h>
 
 int little_endian(){
     int x = 1;
@@ -14,6 +13,5 @@ int main(){
         printf("big_endian\n");
     if(little_endian())
         printf("little_endian\n");
-    printf("%d", BYTE_ORDER);
     return 0;
 }
