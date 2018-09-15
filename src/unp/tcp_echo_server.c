@@ -7,21 +7,31 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
+#define SERVER_PORT 8888
 #define MAX_BUFF_SIZE 100
 char global_buf[MAX_BUFF_SIZE];
+
+void print(char *str, int n) {
+  printf("raw data: ");
+  for (int i = 0; i < n; ++i) {
+    char c = str[i];
+    printf("%d ", c);
+  }
+  printf("\n");
+}
 
 void echo(int connfd) {
   ssize_t n;
   char buf[MAX_BUFF_SIZE];
-  while ((n = read(connfd, buf, MAX_BUFF_SIZE)) > 0) {
-    printf("received data\n");
+  while ((n = read(connfd, buf, MAX_BUFF_SIZE)) > 0) { // will block, if the connection is FIN, n == 0
+    print(buf, n);
     write(connfd, buf, n);
   }
 }
 
 const char *read_oneline(int connfd) {
   ssize_t n = read(connfd, global_buf, MAX_BUFF_SIZE);
-  printf("received: ");
+  write(STDOUT_FILENO, "received: ", 10); // STDOUT_FILENO is part of unistd.h
   for (int i = 0; i < n; ++i) {
     char c = global_buf[i];
     printf("%d ", c);
@@ -50,10 +60,7 @@ void print_file(int connfd, const char *filename) {
 }
 
 void process_connfd(int connfd) {
-  while(1) {
-    const char * filename = read_oneline(connfd);
-    print_file(connfd, filename);
-  }
+  echo(connfd);
 }
 
 int main(int argc, char **argv) {
@@ -65,12 +72,12 @@ int main(int argc, char **argv) {
   bzero(&servaddr, sizeof(servaddr)); // <string.h>, can be replaced with memset
   servaddr.sin_family = AF_INET;
   servaddr.sin_addr.s_addr = htonl(INADDR_ANY); // byte ordering func, host to network, long
-  servaddr.sin_port = htons(8888); // byte ordering func, host to network, short
+  servaddr.sin_port = htons(SERVER_PORT); // byte ordering func, host to network, short
   bind(listenfd, (struct sockaddr *) &servaddr, sizeof(servaddr)); // 把端口绑定到 socket
   listen(listenfd, 1024); // 转化为 listening socket，1024 是最大等待数
   for (;;) {
     chilen = sizeof(cliaddr);
-    connfd = accept(listenfd, (struct sockaddr *) &cliaddr, &chilen); // 客户端三次握手完成后，accept 返回
+    connfd = accept(listenfd, (struct sockaddr *) &cliaddr, &chilen); // the server will block here, 客户端三次握手完成后，accept 返回
     printf("Three-way handshake finished. Connection is established.\n");
     if ((childpid = fork()) == 0) { // fork 子进程
       printf("Child process will close listenfd\n");
