@@ -20,6 +20,7 @@ int queue_init(Queue *q) {
   return 0;
 }
 
+// insert at head
 void job_insert(Queue *q, Job *job) {
   pthread_rwlock_wrlock(&q->lock);
   job->next = q->head;
@@ -31,4 +32,30 @@ void job_insert(Queue *q, Job *job) {
   }
   q->head = job;
   pthread_rwlock_unlock(&q->lock);
+}
+
+// append at tail
+void job_append(Queue *q, Job *job) {
+  pthread_rwlock_wrlock(&q->lock);
+  job->next = NULL;
+  job->prev = q->tail;
+  if (q->tail != NULL) {
+    q->tail->next = job;
+  } else {
+    q->head = job;
+  }
+  q->tail = job;
+  pthread_rwlock_unlock(&q->lock);
+}
+
+Job *job_find(Queue *q, pthread_t pid) {
+  Job *job;
+  if (pthread_rwlock_rdlock(&q->lock) != 0) {
+    return NULL;
+  }
+  for (job = q->head; job != NULL; job = job->next) {
+    if (pthread_equal(job->pid, pid)) break;
+  }
+  pthread_rwlock_unlock(&q->lock);
+  return job;
 }
