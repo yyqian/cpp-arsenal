@@ -41,6 +41,43 @@ void *child(void *arg) {
   pthread_mutex_unlock(&lock);
 }
 
+// produce/consumer
+pthread_cond_t empty_cond = PTHREAD_COND_INITIALIZER;
+pthread_cond_t full_cond = PTHREAD_COND_INITIALIZER;
+int q_count = 0;
+int buffer = 0;
+
+void *producer(void *arg) {
+  for (int i = 0; i < 100; ++i) {
+    pthread_mutex_lock(&lock);
+    while (q_count == 1) {
+      cout << "producer wait" << endl;
+      pthread_cond_wait(&empty_cond, &lock);
+      cout << "producer wakeup" << endl;
+    }
+    buffer = i;
+    q_count = 1;
+    cout << "data produced:" << buffer << endl;
+    pthread_cond_signal(&full_cond);
+    pthread_mutex_unlock(&lock);
+  }
+}
+
+void *consumer(void *arg) {
+  while (true) {
+    pthread_mutex_lock(&lock);
+    while (q_count == 0) {
+      cout << "consumer wait" << endl;
+      pthread_cond_wait(&full_cond, &lock);
+      cout << "consumer wakeup" << endl;
+    }
+    cout << "data consumed:" << buffer << endl;
+    q_count = 0;
+    pthread_cond_signal(&empty_cond);
+    pthread_mutex_unlock(&lock);
+  }
+}
+
 int main(int argc, char **argv) {
   // cv0
   pthread_t pt0;
@@ -60,5 +97,10 @@ int main(int argc, char **argv) {
     cout << "main is wakeup" << endl;
   }
   pthread_mutex_unlock(&lock);
+  // producer/consumer
+  pthread_create(&pt0, NULL, consumer, NULL);
+  pthread_create(&pt1, NULL, producer, NULL);
+  pthread_join(pt0, NULL);
+  pthread_join(pt1, NULL);
   return EXIT_SUCCESS;
 }
