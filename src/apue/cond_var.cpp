@@ -78,6 +78,76 @@ void *consumer(void *arg) {
   }
 }
 
+// producer/consumer
+class Buffer {
+private:
+  pthread_cond_t not_empt;
+  pthread_cond_t not_full;
+  pthread_mutex_t lock;
+  int n;
+  int size;
+  int fill_ptr;
+  int use_ptr;
+  int *data;
+public:
+  Buffer(int sz): size(sz), n(0), fill_ptr(0), use_ptr(0), not_empt(PTHREAD_COND_INITIALIZER), not_full(PTHREAD_COND_INITIALIZER), lock(PTHREAD_MUTEX_INITIALIZER) {
+    data = (int *)malloc(sz * sizeof(int));
+  }
+  ~Buffer() {
+    pthread_cond_destroy(&not_empt);
+    pthread_cond_destroy(&not_full);
+    pthread_mutex_destroy(&lock);
+    free(data);
+  }
+  void produce(int x) {
+    pthread_mutex_lock(&lock);
+    while (n == size) {
+      cout << "producer sleep, n=" << n << endl;
+      pthread_cond_wait(&not_full, &lock);
+      cout << "producer wakeup, n=" << n << endl;
+    }
+    data[fill_ptr] = x;
+    fill_ptr = (fill_ptr + 1) % size;
+    ++n;
+    cout << "producer signal, n=" << n << endl;
+    pthread_cond_signal(&not_empt);
+    pthread_mutex_unlock(&lock);
+  }
+  int consume() {
+    pthread_mutex_lock(&lock);
+    while (n == 0) {
+      cout << "consumer sleep, n=" << n << endl;
+      pthread_cond_wait(&not_empt,  &lock);
+      cout << "consumer wakeup, n=" << n << endl;
+    }
+    int res = data[use_ptr];
+    use_ptr = (use_ptr + 1) % size;
+    --n;
+    cout << "consumer signal, n=" << n << endl;
+    pthread_cond_signal(&not_full);
+    pthread_mutex_unlock(&lock);
+    return res;
+  }
+};
+
+void *buffer_consume(void *arg) {
+  Buffer *buffer = (Buffer *)arg;
+  while (true) {
+    int stuff = buffer->consume();
+    cout << "consumed " << stuff << endl;
+  }
+  return nullptr;
+}
+
+void *buffer_produce(void *arg) {
+  Buffer *buffer = (Buffer *)arg;
+  for (int i = 0; i < 50; ++i) {
+    buffer->produce(i);
+    sleep(1);
+  }
+  return nullptr;
+}
+
 int main(int argc, char **argv) {
   // cv0
   pthread_t pt0;
@@ -98,8 +168,16 @@ int main(int argc, char **argv) {
   }
   pthread_mutex_unlock(&lock);
   // producer/consumer
+  /*
   pthread_create(&pt0, NULL, consumer, NULL);
   pthread_create(&pt1, NULL, producer, NULL);
+  pthread_join(pt0, NULL);
+  pthread_join(pt1, NULL);
+  */
+  // Buffer
+  Buffer buffer(10);
+  pthread_create(&pt0, NULL, buffer_consume, &buffer);
+  pthread_create(&pt1, NULL, buffer_produce, &buffer);
   pthread_join(pt0, NULL);
   pthread_join(pt1, NULL);
   return EXIT_SUCCESS;
