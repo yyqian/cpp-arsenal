@@ -32,7 +32,7 @@ int CompareAndSwap(int *ptr, int expected, int newVal) {
 
 void casLock(lock_t *lock) {
   while (CompareAndSwap(&lock->flag, 0, 1) == 1)
-    ; //
+    ; // 0 表示没有锁住，1表示锁住
 }
 
 // FetchAndAdd
