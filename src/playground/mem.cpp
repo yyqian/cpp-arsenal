@@ -44,6 +44,25 @@ public:
   }
 };
 
+void delete_int_p(int *p) {
+  cout << "will delete p=" << *p << endl;
+  delete p;
+}
+
+class MySharedPtr {
+private:
+  string *p;
+public:
+  MySharedPtr(string *pp): p{pp} {}
+  string *get() {
+    return p;
+  }
+  ~MySharedPtr() {
+    cout << "will delete p" << endl;
+    delete p;
+  }
+};
+
 int main(int argc, char **argv) {
   shared_ptr<string> p1; // pointer to nullptr
   shared_ptr<list<int>> p2;
@@ -76,5 +95,29 @@ int main(int argc, char **argv) {
     cout << b1.size() << "|" << b2.size() << endl; // 3|4
   }
   cout << b1.size() << endl;
+  //
+  int *pint = new int(33);
+  cout << *pint << endl;
+  delete pint;
+  pint == nullptr; // avoid dangling pointer
+  shared_ptr<int> spint(new int(42)); // Not so good;
+  shared_ptr<int> spingGood = make_shared<int>(42); //Good
+  // BAD
+  shared_ptr<int> badP(new int(24));
+  int *pp = badP.get();
+  {
+    shared_ptr<int> q(pp);
+  }
+  cout << *badP << endl; // inner pointer is delted when deleting q
+  // my deleter
+  {
+    shared_ptr<int> ppp(new int(32), delete_int_p); // my deleter
+  }
+  {
+    string *str = new string("abc");
+    MySharedPtr strShared(str);
+    cout << *strShared.get() << endl;
+  }
+  cout << "EXIT" << endl;
   return 0;
 }
