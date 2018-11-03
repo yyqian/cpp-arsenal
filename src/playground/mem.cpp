@@ -63,6 +63,8 @@ public:
   }
 };
 
+
+
 int main(int argc, char **argv) {
   shared_ptr<string> p1; // pointer to nullptr
   shared_ptr<list<int>> p2;
@@ -92,7 +94,7 @@ int main(int argc, char **argv) {
     StrBlob b2 = {"a", "an", "the"};
     b1 = b2;
     b2.push_back("about");
-    cout << b1.size() << "|" << b2.size() << endl; // 3|4
+    cout << b1.size() << "|" << b2.size() << endl; // 4|4
   }
   cout << b1.size() << endl;
   //
@@ -106,9 +108,9 @@ int main(int argc, char **argv) {
   shared_ptr<int> badP(new int(24));
   int *pp = badP.get();
   {
-    shared_ptr<int> q(pp);
+    //shared_ptr<int> q(pp); // inner pointer is delted when deleting q
   }
-  cout << *badP << endl; // inner pointer is delted when deleting q
+  cout << *badP << endl; 
   // my deleter
   {
     shared_ptr<int> ppp(new int(32), delete_int_p); // my deleter
