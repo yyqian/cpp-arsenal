@@ -40,23 +40,24 @@ void producer(shared_ptr<queue<int>> queuePtr) {
   }
 }
 
+template <typename T>
 class Buffer {
 public:
   Buffer(int cap) : data(cap), n{0}, fill_ptr{0}, use_ptr{0} {}
-  int take() {
+  T take() {
     unique_lock<mutex> lk(m);
     while (n == 0) {
       cout << "consumer sleep\n";
       not_empty.wait(lk);
     }
-    int ret = data[use_ptr];
+    T ret = data[use_ptr];
     use_ptr = (use_ptr + 1) % data.size();
     --n;
     lk.unlock();
     not_full.notify_all();
     return ret;
   }
-  void put(int x) {
+  void put(T x) {
     unique_lock<mutex> lk(m);
     while (n == data.size()) {
       cout << "producer sleep\n";
@@ -72,7 +73,7 @@ private:
   mutex m;
   condition_variable not_full;
   condition_variable not_empty;
-  vector<int> data;
+  vector<T> data;
   int fill_ptr;
   int use_ptr;
   int n;
@@ -95,7 +96,7 @@ void test0() {
 }
 
 void test1() {
-  Buffer buf(10);
+  Buffer<int> buf(10);
   thread con([&] {
     while (true) {
       cout << "consume: " + to_string(buf.take()) + "\n";
@@ -111,6 +112,6 @@ void test1() {
 }
 
 int main(int argc, char **argv) {
-  test1();
+  test0();
   return 0;
 }
